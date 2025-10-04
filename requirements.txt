@@ -1,7 +1,0 @@
-pandas>=1.5.0
-numpy>=1.23.0
-matplotlib>=3.6.0
-statsmodels>=0.14.0
-linearmodels>=4.27
-openpyxl>=3.0.0
-
