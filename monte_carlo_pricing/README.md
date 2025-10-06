@@ -1,58 +1,157 @@
-Monte Carlo Pricer for Exotic Structured Product
+Monte Carlo Pricer for Multi-Asset Structured Products
 Overview
-This code implements a Monte Carlo simulation framework to price and analyze a structured note with the following features:
+This project implements a Monte Carlo simulation framework to price and analyze exotic structured notes. The code was developed as part of my quantitative finance coursework at Université Paris Dauphine and demonstrates proficiency in numerical methods, derivatives pricing, and risk management.
+Product Description
+The pricer values a 7-year principal-protected note linked to a basket of 9 US equities with the following payoff structure:
+Annual Coupons (Years 1-7):
 
-Multi-asset basket (9 US equities)
-Annual coupons based on capped/floored basket performance
-7-year maturity with principal protection at maturity
+Observation date: April 25th each year
+For each asset: calculate return vs. initial price
+Apply performance adjustments:
 
-Key Components
-1. Path Generation (generate_paths)
-
-Simulates correlated Geometric Brownian Motion paths for all assets
-Uses Cholesky decomposition to incorporate correlation structure
-Accounts for risk-free rate and dividend yield
-
-2. Payoff Structure (calculate_payoffs)
-
-Annual observation dates (April 25th each year)
-For each observation:
-
-Calculate each asset's performance vs. initial price
-Apply cap (+6% max) and floor (-30% min) to individual performances
-Coupon = max(0, arithmetic mean of adjusted performances)
+Cap positive returns at +6%
+Floor negative returns at -30%
 
 
-Principal returned at maturity
-All cashflows discounted using zero-coupon curve
+Coupon = max(0, arithmetic average of adjusted returns) × nominal × time factor
+Coupon paid only if basket performance is positive
 
-3. Zero-Coupon Curve (construct_zero_coupon_curve)
+Maturity (Year 7):
 
-Bootstraps curve from market data (overnight rates, futures, swap rates)
-Applies outlier detection and cubic spline interpolation
-Used for discounting future cashflows
+Principal (100% of nominal) returned regardless of performance
+Final coupon paid if applicable
 
-4. Greeks Calculation
-Implements bump-and-revalue for:
+Methodology
+1. Path Simulation
 
-Delta: sensitivity to each underlying price (1% bump)
-Vega: sensitivity to each volatility (1bp bump)
-Rho: sensitivity to interest rates (1bp bump)
-Corr: sensitivity to correlation matrix (10% bump)
+Model: Correlated Geometric Brownian Motion
+Correlation handling: Cholesky decomposition of correlation matrix with positive semi-definite correction
+Parameters: Risk-free rate, dividend yield, asset volatilities
+Calendar: NYSE trading days (excludes weekends and holidays)
 
-Uses nearest_positive_definite to ensure correlation matrices remain valid after shocks.
-5. Interactive Dashboard (create_dashboard)
+2. Discounting
 
-Jupyter widget interface to adjust all parameters
-Real-time recalculation on "Run Simulation" button
-Displays: product price, Greeks, individual sensitivities, performance table
+Zero-coupon curve bootstrapped from market data:
 
-Technical Notes
+Short rates (overnight to 6 months)
+Eurodollar futures (medium-term rates)
+Swap rates (2-10 years)
 
-Uses fixed seed for reproducibility within each simulation
-Handles correlation matrix corrections to maintain positive semi-definiteness
+
+Cubic spline interpolation with outlier detection
+All cashflows discounted to valuation date
+
+3. Risk Analytics
+Greeks calculated via bump-and-revalue method:
+
+Delta: Price sensitivity to ±1% move in each underlying
+Vega: Price sensitivity to ±1bp move in each volatility
+Rho: Price sensitivity to ±1bp move in risk-free rate
+Correlation risk: Sensitivity to ±10% shock to correlation matrix
+
+4. Numerical Stability
+
+Correlation matrix correction ensures positive semi-definiteness after shocks
+Fixed random seed for reproducibility within simulations
 Vectorized operations for computational efficiency
-Trading calendar based on NYSE schedule (excludes weekends/holidays)
 
-Typical Use Case
-Price a worst-of autocallable note, analyze sensitivities to market parameters, and stress-test under different scenarios (volatility spikes, correlation breakdowns, rate moves).
+Code Structure
+projet_RG_exotic_options.ipynb
+├── Cell 1: Core functions
+│   ├── nearest_positive_definite()      # Matrix correction
+│   ├── generate_paths()                 # Monte Carlo simulation
+│   ├── construct_zero_coupon_curve()    # Curve bootstrapping
+│   ├── calculate_payoffs()              # Product payoff logic
+│   ├── calculate_product_price()        # Price aggregation
+│   ├── calculate_*_sensitivities()      # Greeks computation
+│   └── create_dashboard()               # Interactive interface
+├── Cell 2: Parameter initialization
+│   └── Market data and product specs
+└── Cell 3: Dashboard execution
+    └── Interactive widget interface
+Dependencies
+pythonnumpy
+pandas
+scipy
+matplotlib
+pandas_market_calendars
+ipywidgets
+Install with:
+bashpip install pandas-market-calendars
+Usage
+PyCharm or Google Colab(Recommended) 
+
+Upload projet_RG_exotic_options.ipynb to Google Colab
+Run Cell 1 (install dependencies + define functions)
+Run Cell 2 (initialize parameters + plot zero-coupon curve)
+Run Cell 3 (launch interactive dashboard)
+Adjust parameters via sliders and click "Run Simulation"
+
+Parameters (adjustable via dashboard)
+
+Asset prices and volatilities: Initial market conditions
+Number of simulations: Monte Carlo paths (100-100,000)
+Nominal: Product notional amount
+Risk-free rate: Discounting and drift adjustment
+Bump sizes: Custom shocks for sensitivity analysis
+
+Delta bump (%)
+Vega bump (bps)
+Rho bump (bps)
+Correlation bump (bps)
+
+
+
+Output
+The dashboard displays:
+
+Product Price: Fair value and % of nominal
+Simulation Parameters: Inputs used in valuation
+Greeks: Aggregate sensitivities (Delta, Vega, Rho, Corr)
+Risks Summary: Impact of specified bumps on price
+Delta/Vega by Asset: Individual contributions to portfolio Greeks
+Performance Table: Detailed path-by-path analysis with coupons and discounted payoffs
+
+Key Features
+
+Correlation matrix validation: Automatic correction to ensure positive semi-definiteness
+Realistic calendar: Uses actual NYSE trading days
+Market data integration: Bootstraps curve from observable rates
+Interactive analysis: Real-time parameter adjustments without re-running code
+Reproducibility: Fixed random seed per simulation
+
+Limitations and Extensions
+Current Limitations
+
+Assumes constant volatility (no stochastic vol)
+Lognormal asset dynamics (no jumps)
+Constant correlation structure
+No early redemption features (autocall)
+
+Possible Extensions
+
+Implement variance reduction techniques (antithetic variates, control variates)
+Add Heston stochastic volatility model
+Incorporate jump-diffusion dynamics
+Extend to autocallable structures
+Add Monte Carlo Greeks (pathwise derivatives)
+
+Academic Context
+This project demonstrates:
+
+Numerical methods for derivative pricing (Monte Carlo simulation)
+Linear algebra for correlation structure (Cholesky decomposition, eigenvalue analysis)
+Financial mathematics (risk-neutral pricing, discounting)
+Software engineering (modular code, interactive visualization)
+
+These skills are directly applicable to quantitative research in asset pricing, risk management, and computational finance.
+References
+
+Glasserman, P. (2003). Monte Carlo Methods in Financial Engineering. Springer.
+Higham, N. J. (2002). Computing the nearest correlation matrix. IMA Journal of Numerical Analysis, 22(3), 329-343.
+Hull, J. C. (2018). Options, Futures, and Other Derivatives (10th ed.). Pearson.
+
+Author
+Rodrigue Girard
+MSc Finance and Economics, London School of Economics
+Magistère in Banking, Finance, and Insurance, Université Paris Dauphine-PSL
