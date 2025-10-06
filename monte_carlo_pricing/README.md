@@ -81,6 +81,7 @@ bashpip install pandas-market-calendars
 Usage
 PyCharm or Google Colab(Recommended) 
 
+For Google Colab usage:
 Upload projet_RG_exotic_options.ipynb to Google Colab
 Run Cell 1 (install dependencies + define functions)
 Run Cell 2 (initialize parameters + plot zero-coupon curve)
