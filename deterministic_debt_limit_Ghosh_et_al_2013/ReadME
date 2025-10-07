@@ -1,6 +1,6 @@
 # Fiscal Reaction Functions and Debt Sustainability Limits
 
-Replication and extension of Ghosh et al. (2013) fiscal reaction function analysis for 23 OECD countries (1980-2022).
+Replication and extension of Ghosh et al. (2013) fiscal reaction function and debt limit analysis for 23 OECD countries (1980-2022)
 
 ## Overview
 
@@ -50,22 +50,20 @@ For dynamic model, steady-state reaction = f(d) / (1 - β₅), assuming output g
 
 ## Key Results
 
-The models successfully estimate debt limits for all countries:
-- Static model maintains methodological consistency with Ghosh et al.
-- Dynamic model addresses econometric concerns (autocorrelation corrected: Box-Ljung p = 0.078, R² = 0.76)
+The models estimate debt limits (or not if doesn't exist) for all countries:
+- First model maintains methodological consistency with Ghosh et al.
+- Dynamic model addresses econometric concerns 
 - Countries with negative r-g differentials show higher sustainable debt levels
 - Cubic specification captures non-linear fiscal responses
 
 ## Files
-
 - `gosh_et_al_R_v2.py`: Main analysis script
-- `rg_differential_annual_10y.csv`: Annual r-g data with 10-year averages
-- `rg_summary_by_country.csv`: Country-level r-g summary statistics
+- `gosh_et_al_R_v2.ipynb`: Main analysis script for Colab
 
 ## Usage
 
 ### Google Colab (R environment)
-1. Open Google Colab and select R runtime
+1. Open Google Colab and select R runtime (Select "Execution" in the upper bar and "modify execution type"-> there select R)
 2. Upload the script file
 3. Run all cells sequentially
 
