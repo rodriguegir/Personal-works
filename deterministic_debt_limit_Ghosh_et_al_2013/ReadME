@@ -57,7 +57,7 @@ The models estimate debt limits (or not if doesn't exist) for all countries:
 - Cubic specification captures non-linear fiscal responses
 
 ## Files
-- `gosh_et_al_R_v2.py`: Main analysis script
+- `gosh_et_al_R_v2.R`: Main analysis script
 - `gosh_et_al_R_v2.ipynb`: Main analysis script for Colab
 
 ## Usage
@@ -68,7 +68,7 @@ The models estimate debt limits (or not if doesn't exist) for all countries:
 3. Run all cells sequentially
 
 ### RStudio
-1. Open `gosh_et_al_R_v2.py` in RStudio
+1. Open `gosh_et_al_R_v2.R` in RStudio
 2. Install required packages (see below)
 3. Run the script
 4. Note: You may need to adjust file paths for local environment
