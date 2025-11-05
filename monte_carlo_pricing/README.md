@@ -135,18 +135,6 @@ Implement variance reduction techniques (antithetic variates, control variates)
 Add Heston stochastic volatility model
 Incorporate jump-diffusion dynamics
 Extend to autocallable structures
-Add Monte Carlo Greeks (pathwise derivatives)
-
-Academic Context
-This project demonstrates:
-
-Numerical methods for derivative pricing (Monte Carlo simulation)
-Linear algebra for correlation structure (Cholesky decomposition, eigenvalue analysis)
-Financial mathematics (risk-neutral pricing, discounting)
-Software engineering (modular code, interactive visualization)
-
-These skills are directly applicable to quantitative research in asset pricing, risk management, and computational finance.
-References
 
 Glasserman, P. (2003). Monte Carlo Methods in Financial Engineering. Springer.
 Higham, N. J. (2002). Computing the nearest correlation matrix. IMA Journal of Numerical Analysis, 22(3), 329-343.
