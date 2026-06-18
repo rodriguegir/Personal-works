@@ -12,14 +12,14 @@ of performance.
 
 ## Methodology
 
-**Path simulation** — Correlated GBM with Cholesky decomposition. Correlation 
+**Path simulation**: Correlated GBM with Cholesky decomposition. Correlation 
 matrix corrected for positive semi-definiteness after shocks. NYSE calendar 
 (excludes weekends and holidays).
 
-**Discounting** — Zero-coupon curve bootstrapped from short rates, Eurodollar 
+**Discounting**: Zero-coupon curve bootstrapped from short rates, Eurodollar 
 futures, and swap rates (2–10y). Cubic spline interpolation.
 
-**Greeks** — Bump-and-revalue method:
+**Greeks**: Bump-and-revalue method:
 - Delta: ±1% move per underlying
 - Vega: ±1bp per volatility
 - Rho: ±1bp on risk-free rate
@@ -27,7 +27,7 @@ futures, and swap rates (2–10y). Cubic spline interpolation.
 
 ## Usage
 
-> **Recommended: Google Colab** — the notebook includes an interactive 
+> **Recommended: Google Colab** -> the notebook includes an interactive 
 > dashboard with sliders for all parameters (number of paths, bump sizes, 
 > notional, risk-free rate). No local setup required.
 
