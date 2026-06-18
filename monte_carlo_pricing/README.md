@@ -32,6 +32,7 @@ futures, and swap rates (2–10y). Cubic spline interpolation.
 > notional, risk-free rate). No local setup required.
 
 Open projet_RG_exotic_options.ipynb in Google Colab
+
 Run Cell 1 — defines all functions
 
 Run Cell 2 — initializes market data and plots zero-coupon curve
