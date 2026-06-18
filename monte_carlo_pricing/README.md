@@ -52,5 +52,3 @@ python projet_RG_exotic_options.py
 ## Author
 
 **Rodrigue Girard**  
-MSc Finance and Economics, London School of Economics  
-Magistère Banque-Finance-Assurance, Université Paris-Dauphine
