@@ -47,8 +47,6 @@ python projet_RG_exotic_options.py
 
 ## References
 
-- Glasserman, P. (2003). *Monte Carlo Methods in Financial Engineering*. Springer.
-- Higham, N. J. (2002). Computing the nearest correlation matrix. *IMA Journal of Numerical Analysis*, 22(3).
 - Hull, J. C. (2018). *Options, Futures, and Other Derivatives* (10th ed.). Pearson.
 
 ## Author
