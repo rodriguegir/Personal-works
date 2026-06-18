@@ -80,7 +80,7 @@ install.packages(c("httr", "jsonlite", "dplyr", "tidyr", "plm",
                    "lmtest", "sandwich", "mFilter", "zoo"))
 
 
-Model Choice
+## Model Choice
 We present both specifications:
 
 Static model for methodological replication of Ghosh et al.
@@ -88,11 +88,11 @@ Dynamic model for more econometric robustness
 
 The static model prioritizes comparability with original research (but presence of autocorrelation), while the dynamic model addresses residual autocorrelation present in fiscal data.
 
-Caveats
+## Caveats
 This is a very simplistic replication 
 Econometric robustness is weak
 But the purpose is more to use econometric tools
 
-References
+## References
 Ghosh, A. R., Kim, J. I., Mendoza, E. G., Ostry, J. D., & Qureshi, M. S. (2013). Fiscal fatigue, fiscal space and debt sustainability in advanced economies. The Economic Journal, 123(566), F4-F30.
 
