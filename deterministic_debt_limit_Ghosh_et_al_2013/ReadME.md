@@ -79,7 +79,7 @@ The models estimate debt limits (or not if doesn't exist) for all countries:
 install.packages(c("httr", "jsonlite", "dplyr", "tidyr", "plm", 
                    "lmtest", "sandwich", "mFilter", "zoo"))
 
-
+```
 ## Model Choice
 We present both specifications:
 
